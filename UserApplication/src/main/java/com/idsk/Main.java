@@ -15,6 +15,7 @@ public class Main {
         Connection connection = postgresService.makeConnection();
 
         userInput.getInput();
+        postgresService.createTable(connection, "usercreds");
         ResultSetMetaData resultSetMetaData;
         try {
             resultSetMetaData = postgresService.metaData(connection, "usercreds");
@@ -30,7 +31,7 @@ public class Main {
         userCredential.setQualification(userInputValidator.inputValidator(userInput.qualification, resultSetMetaData, 6));
 
 
-        postgresService.createTable(connection, "usercreds");
+
 
         postgresService.insertPayload(connection,"usercreds", userCredential.getUserID(), userCredential.getUserName(), userCredential.getPassword(),
                 userCredential.getFirstName(), userCredential.getLastName(), userCredential.getQualification());
